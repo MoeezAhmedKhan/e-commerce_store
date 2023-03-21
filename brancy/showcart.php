@@ -23,6 +23,25 @@
 
 <main class="main-content" style="margin-top:100px">
 
+    <?php 
+
+        if(isset($_SESSION["placced"]) && $_SESSION["placced"] = "Order has been Placed Thanks for shopping")
+        {
+            ?>
+                <div class="alert alert-success" id="successMesg" role="alert"><?php echo $_SESSION["placced"]; ?></div>
+            <?php
+            unset($_SESSION["placced"]);
+        }
+        elseif(isset($_SESSION["notPlaced"]) && $_SESSION["notPlaced"] = "Something went wrong while Placing order")
+        {
+            ?>
+                <div class="alert alert-success" id="successMesg" role="alert"><?php echo $_SESSION["notPlaced"]; ?></div>
+            <?php
+            unset($_SESSION["notPlaced"]);
+        }
+
+    ?>
+
 <!--== Start Contact Area Wrapper ==-->
 <section class="contact-area">
     <div class="container">
@@ -50,7 +69,7 @@
                             $index = 1;
                             $ids = array();
 
-                            $select = "SELECT * FROM `product_cart` WHERE user_id = {$_SESSION['user_id']}";
+                            $select = "SELECT * FROM `product_cart` WHERE user_id = {$_SESSION['user_id']} and `status` = 'pending'";
                             $run = mysqli_query($conn,$select);
                             $row = mysqli_num_rows($run);
                             if($row > 0)
@@ -151,9 +170,9 @@
                     <h2>Check Out</h2>
                     <form method="POST" action="phpfiles/insertion.php">
                          <div class="form-row">
-                         <input type="text" name="userId" value="<?php echo $addressArr['id'] ?>"> 
-                         <input type="text" name="productIds[]" value="<?php print_r($ids)  ?>"> 
-                         <input type="text" name="totalPrice" value="<?php echo $total ?>"> 
+                         <input type="hidden" name="userId" value="<?php echo $addressArr['id'] ?>"> 
+                         <input type="hidden" name="productIds[]" value="<?php print_r($ids)  ?>"> 
+                         <input type="hidden" name="totalPrice" value="<?php echo $total ?>"> 
                             <div class="row">
                                 <div class="col-xl-12 mb-3">
                                     <label for="validationDefault01">Please Confirm Your Deivery Address</label>

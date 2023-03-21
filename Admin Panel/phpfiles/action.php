@@ -151,3 +151,24 @@ if (isset($_POST['update_slider_pro_btn'])) {
         header("location:../manage_slider_products.php");
     }
 }
+
+
+
+// for change order status
+
+// for update category
+if (isset($_POST['update_orderstatus_btn'])) {
+    $oid = $_POST['id'];
+    $o_status = $_POST['o_status'];
+
+
+   echo  $insert = "UPDATE `order_details` SET `status`= '$o_status' WHERE `id`= $oid";
+    $excec = mysqli_query($conn, $insert);
+    if ($excec) {
+        $_SESSION['changeStatus'] = "Status Updated Successfully";
+        header("location:../manage_orders.php");
+    } else {
+        $_SESSION['NoChange'] = "Something Went Wrong";
+        header("location:../manage_orders.php");
+    }
+}

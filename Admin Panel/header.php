@@ -417,6 +417,13 @@
                             </a>
                         </li>
 
+                        <li>
+                            <a href="manage_orders.php">
+                                <i class="mdi mdi-calendar"></i>
+                                <span> Manage Orders </span>
+                            </a>
+                        </li>
+
 
                         
                     </ul>

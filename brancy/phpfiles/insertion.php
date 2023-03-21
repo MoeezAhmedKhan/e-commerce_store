@@ -117,29 +117,31 @@ if(isset($_POST['login-btn'])) {
 if(isset($_POST["orderPlace-btn"]))
 {
     $userId = $_POST["userId"];
-    $productIds = array($_POST["productIds"]);
+    // $productIds = $_POST["productIds"];
     // print_r($productIds);die();
     $totalPrice = $_POST["totalPrice"];
     $deliveryAddress = $_POST["deliveryAddress"];
     $method = $_POST["method"];
 
-    foreach($productIds as $pid)
-    {
-            $insert = "INSERT INTO `order_details`(`user_id`, `product_id`, `total_amount`, `delivery_address`, `payment_method`) VALUES 
-            ($userId,'$pid',$totalPrice,'$deliveryAddress','$method')";
-            $run = mysqli_query($conn,$insert);
-            if($run)
-            {
-                echo  "Order has been Placed Thanks for shopping";
-            }
-            else
-            {
-                echo "Something went wrong while Placing order";
-            }
+    // foreach($productIds as $pid)
+    // {
+        $insert = "INSERT INTO `order_details`(`user_id`, `total_amount`, `delivery_address`, `payment_method`) VALUES 
+        ($userId,$totalPrice,'$deliveryAddress','$method')";
+        $run = mysqli_query($conn,$insert);
+        if($run)
+        {
+            $status = "DELETE FROM `product_cart`";
+            mysqli_query($conn,$status);
+            $_SESSION["placced"] = "Order has been Placed Thanks for shopping";
+            header("location:../showcart.php");
+        }
+        else
+        {
+            $_SESSION["notPlaced"] = "Something went wrong while Placing order";
+            header("location:../showcart.php");
+        }
 
-       
-
-    }
+    // }
     
    
 

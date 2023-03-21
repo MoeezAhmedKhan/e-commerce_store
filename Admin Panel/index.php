@@ -78,6 +78,77 @@
 
     <!-- end col -->
 
+    <div class="col-xl-3 col-md-6">
+
+    <?php 
+        require_once("./phpfiles/connection.php");
+        $sql = "SELECT * FROM `order_details` WHERE status = 'pending'";
+        $run = mysqli_query($conn,$sql);
+        $row = mysqli_num_rows($run);
+    ?>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Placed Orders</h4>
+
+                <div class="widget-box-2">
+                    <div class="widget-detail-2">
+                        <h2 class="fw-normal mb-1"> <?php echo $row ?> </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-xl-3 col-md-6">
+
+        <?php 
+            require_once("./phpfiles/connection.php");
+            $sql = "SELECT * FROM `order_details` WHERE status = 'inprogress'";
+            $run = mysqli_query($conn,$sql);
+            $row = mysqli_num_rows($run);
+        ?>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mt-0 mb-3">Inprogress Orders</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <h2 class="fw-normal mb-1"> <?php echo $row ?> </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+        <?php 
+            require_once("./phpfiles/connection.php");
+            $sql = "SELECT * FROM `order_details` WHERE status = 'shipped'";
+            $run = mysqli_query($conn,$sql);
+            $row = mysqli_num_rows($run);
+        ?>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mt-0 mb-3">Completed Orders</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <h2 class="fw-normal mb-1"> <?php echo $row ?> </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
 </div>
 <!-- end row -->
 
